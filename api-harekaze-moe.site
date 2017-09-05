@@ -1,0 +1,23 @@
+server {
+    #include config.pool/listen.conf;
+    listen 80;
+    server_name api.harekaze.moe;
+
+    root /home/dd-han/services/websites/api-harekaze/;
+    include config.pool/baseSecure.conf;
+    access_log /var/log/nginx/access_api-harekaze-moe.site.log;
+    error_log /var/log/nginx/error_api-harekaze-moe.site.log;
+
+    ## SSL Settings
+    #ssl_certificate_key ;
+    #ssl_certificate     ;
+    #include config.pool/ssl.conf;
+    #include config.pool/let-enc-Auth.conf;
+    charset utf-8;
+    override_charset on;
+    add_header 'Access-Control-Allow-Origin' 'null';
+
+    location / {
+        index index.html index.html;
+    }
+}
