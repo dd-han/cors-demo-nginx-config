@@ -21,7 +21,8 @@ server {
         # 
         # 另外這個功能背後是靠 Rewrite 做的， Windows 的 nginx 不支援 Rewrite
         proxy_pass https://api.harekaze.moe/;
-        include proxy_params;
+        # 這行可能會導致某些 API Server 沒辦法被反向代理
+        # include proxy_params;
 
     }
 
