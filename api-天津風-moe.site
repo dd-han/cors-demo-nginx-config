@@ -5,8 +5,8 @@ server {
 
     root /home/dd-han/services/websites/api-amatsukaze/;
     include config.pool/baseSecure.conf;
-    access_log /var/log/nginx/access_api-天津風-moe.site.log;
-    error_log /var/log/nginx/error_api-天津風-moe.site.log;
+    access_log /var/log/nginx/access_api-xn--rssy87b1y5a-moe.site.log;
+    error_log /var/log/nginx/error_api.xn--rssy87b1y5a.moe.site.log;
 
     ## SSL Settings
     #ssl_certificate_key ;
