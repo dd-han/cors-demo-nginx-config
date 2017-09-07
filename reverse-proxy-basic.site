@@ -1,0 +1,19 @@
+server {
+    listen 80 default_server;
+
+    server_name localhost;
+
+    # 設定一個路徑
+    location / {
+        # 收到路徑後，直接把 Request 送到
+        proxy_pass https://api.harekaze.moe;
+
+        # 通常我們會把一些 Header 傳送過去，讓 API Server 知道不是我們直接敲它
+        # 而是有人敲我們之後我們去敲他，避免 API Server 得不到真正的 IP
+        include proxy_params;
+
+        ## 思考：如果 API Server 的 https 常常故障，但是你希望盡可能用 https 存取 API
+        ## 有沒有辦法做到？
+    }
+
+}

@@ -1,0 +1,31 @@
+server {
+    listen 80 default_server;
+
+    server_name localhost;
+
+    location / {
+        proxy_pass http://localhost:5000;
+        include proxy_params;
+    }
+
+    # 注意這裡：
+    # 最後面的 / 是必要的
+    # 如果寫成 /api 的話，當你呼叫 /api/ 並不會進來
+    # 呼叫 /api/ship.json 也不會進來，只有 /api 會進來
+    location /api/ {
+        # 注意這裡：
+        # 最後面加上一個 / 後， nginx 就會把跟 location 重複的 /api/ 刪除
+        # 也就是說你呼叫 /api/ship.json 只會取 ship.json 
+        # 再跟 proxy_pass 的 https://api.harekaze.moe/
+        # 組合成 https://api.harekaze.moe/ship.json
+        # 
+        # 另外這個功能背後是靠 Rewrite 做的， Windows 的 nginx 不支援 Rewrite
+        proxy_pass https://api.harekaze.moe/;
+        include proxy_params;
+
+    }
+
+    ## 思考：如果你的網站要存取多個 API 都不允許跨域存取
+    ## 你該怎麼做？
+
+}
